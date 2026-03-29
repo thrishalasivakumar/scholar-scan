@@ -1,0 +1,678 @@
+/* ============================================================
+   ScholarScan — Premium Light Theme
+   Fonts: Inter (body), Outfit (headings), JetBrains Mono (data)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap');
+
+/* ---------- Design Tokens ---------- */
+:root {
+  /* Core Palette */
+  --bg-primary:    #f8f9fc;
+  --bg-secondary:  #eef1f6;
+  --bg-card:       #ffffff;
+  --bg-card-hover: #f4f6fa;
+  --bg-elevated:   #ffffff;
+
+  /* Accent system — rich indigo/violet */
+  --accent:        #5b4cdb;
+  --accent-soft:   rgba(91, 76, 219, 0.08);
+  --accent-glow:   rgba(91, 76, 219, 0.18);
+  --accent-vivid:  #6c5ce7;
+  --accent-dark:   #3d32a8;
+
+  /* Semantic colors */
+  --success:       #00b894;
+  --success-bg:    rgba(0, 184, 148, 0.08);
+  --warning:       #f39c12;
+  --warning-bg:    rgba(243, 156, 18, 0.08);
+  --info:          #0984e3;
+  --info-bg:       rgba(9, 132, 227, 0.08);
+  --danger:        #d63031;
+
+  /* Text hierarchy */
+  --text-primary:   #1a1a2e;
+  --text-secondary: #4a5568;
+  --text-muted:     #94a3b8;
+  --text-accent:    #5b4cdb;
+
+  /* Borders & surfaces */
+  --border:        rgba(0, 0, 0, 0.07);
+  --border-hover:  rgba(91, 76, 219, 0.25);
+  --glass:         rgba(255, 255, 255, 0.82);
+
+  /* Gradients */
+  --gradient-brand:  linear-gradient(135deg, #5b4cdb 0%, #6c5ce7 40%, #a29bfe 100%);
+  --gradient-card:   linear-gradient(145deg, #ffffff 0%, #f8f9fc 100%);
+  --gradient-sidebar: linear-gradient(180deg, #f0f1f8 0%, #ffffff 100%);
+  --gradient-banner: linear-gradient(135deg, #f0eeff 0%, #f8f7ff 30%, #ffffff 70%, #f3f1ff 100%);
+
+  /* Shadows */
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md:  0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow-lg:  0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 16px var(--accent-glow);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- Global Reset & Base ---------- */
+html, body,
+[data-testid='stAppViewContainer'],
+[data-testid='stHeader'] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-primary) !important;
+}
+
+[data-testid='stAppViewContainer'] {
+  background:
+    radial-gradient(ellipse at 15% 5%, rgba(91, 76, 219, 0.04) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 95%, rgba(162, 155, 254, 0.03) 0%, transparent 50%),
+    var(--bg-primary) !important;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+[data-testid='stHeader'] {
+  background: rgba(248, 249, 252, 0.92) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- Typography ---------- */
+h1, h2, h3, h4 {
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+h1 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+}
+
+h2 {
+  font-size: clamp(1.55rem, 3.2vw, 2.3rem);
+  font-weight: 800;
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  font-weight: 700;
+}
+
+h4 {
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-weight: 700;
+}
+
+p, li, label, span {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+p, li, label,
+.stMarkdown, .stCaption {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+strong, b {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ---------- Section Title ---------- */
+.section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 1.6rem 0 0.6rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 1.2em;
+  background: var(--gradient-brand);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ---------- Brand Banner ---------- */
+.top-brand-banner {
+  background: var(--gradient-banner);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.2rem 1.6rem;
+  margin-bottom: 1.8rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.top-brand-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-brand);
+}
+
+.top-brand-banner::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -8%;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(91, 76, 219, 0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.top-brand-banner h1 {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-size: clamp(3.5rem, 8vw, 6rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.03em !important;
+  background: var(--gradient-brand) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  line-height: 1.1 !important;
+}
+
+.top-brand-banner h1 span {
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  background: inherit !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  line-height: inherit !important;
+}
+
+.top-brand-banner p {
+  margin: 0.65rem 0 0;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.88rem, 1.5vw, 1.05rem);
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Info Card ---------- */
+.info-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.05rem 1.3rem;
+  margin-bottom: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.info-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.info-card h4 {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.info-card p {
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.info-card-neutral {
+  border-left: 3px solid var(--accent);
+}
+
+.info-card-neutral::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--accent-soft) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+.info-card-success {
+  border-left: 3px solid var(--success);
+}
+
+.info-card-success::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--success-bg) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+/* ---------- Metric Chip ---------- */
+.metric-chip {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 0.55rem 1.1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s var(--ease-out);
+}
+
+.metric-chip:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.metric-chip span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.metric-chip strong {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--text-accent);
+  font-size: 0.84rem;
+}
+
+/* ---------- Key Point Card ---------- */
+.keypoint-card {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 0.55rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s var(--ease-out);
+}
+
+.keypoint-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+}
+
+.keypoint-index {
+  width: 2.1rem;
+  height: 2.1rem;
+  min-width: 2.1rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--accent-vivid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.keypoint-text {
+  color: var(--text-primary);
+  font-size: 0.94rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ---------- Sidebar ---------- */
+[data-testid='stSidebar'] {
+  background: var(--gradient-sidebar) !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+[data-testid='stSidebar'] > div:first-child {
+  background: transparent !important;
+}
+
+/* Increase sidebar font sizes */
+[data-testid='stSidebar'] * {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+[data-testid='stSidebar'] h1,
+[data-testid='stSidebar'] h2,
+[data-testid='stSidebar'] h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* Capitalize "app" → "App" in sidebar navigation */
+[data-testid='stSidebarNav'] li:first-child a span,
+[data-testid='stSidebarNav'] li:first-child span {
+  text-transform: capitalize !important;
+}
+
+/* Sidebar nav links — larger font */
+[data-testid='stSidebarNav'] a span {
+  font-size: 1.12rem !important;
+  font-weight: 500;
+}
+
+/* ---------- Form Elements ---------- */
+[data-testid='stTextInput'] > div > div > input,
+[data-testid='stSelectbox'] > div > div,
+.stSelectSlider {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.94rem !important;
+  transition: border-color 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out) !important;
+}
+
+[data-testid='stTextInput'] > div > div > input:focus {
+  border-color: var(--accent) !important;
+  box-shadow: var(--shadow-glow) !important;
+}
+
+/* File uploader */
+[data-testid='stFileUploader'] {
+  border-radius: var(--radius-md);
+}
+
+[data-testid='stFileUploader'] > div {
+  background: var(--bg-card) !important;
+  border: 2px dashed var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  transition: all 0.3s var(--ease-out) !important;
+}
+
+[data-testid='stFileUploader'] > div:hover {
+  border-color: var(--accent) !important;
+  background: var(--bg-card-hover) !important;
+}
+
+/* Alerts */
+div[data-testid='stAlert'] {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  font-size: 0.92rem;
+}
+
+/* ---------- Buttons ---------- */
+.stButton > button,
+.stDownloadButton > button {
+  border-radius: var(--radius-sm);
+  border: none;
+  min-height: 2.7rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  transition: all 0.3s var(--ease-out);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.stButton > button {
+  background: var(--gradient-brand);
+  color: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 4px 16px rgba(91, 76, 219, 0.22);
+}
+
+.stButton > button span,
+.stButton > button p {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+.stButton > button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(91, 76, 219, 0.32);
+}
+
+.stButton > button:active {
+  transform: translateY(0);
+}
+
+.stDownloadButton > button {
+  background: var(--bg-secondary);
+  color: var(--text-accent);
+  border: 1px solid var(--border);
+}
+
+.stDownloadButton > button:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.info-card,
+.keypoint-card,
+.metric-chip {
+  animation: fadeInUp 0.4s var(--ease-out) both;
+}
+
+.info-card:nth-child(1) { animation-delay: 0.05s; }
+.info-card:nth-child(2) { animation-delay: 0.10s; }
+.info-card:nth-child(3) { animation-delay: 0.15s; }
+
+.keypoint-card:nth-child(1) { animation-delay: 0.05s; }
+.keypoint-card:nth-child(2) { animation-delay: 0.12s; }
+.keypoint-card:nth-child(3) { animation-delay: 0.19s; }
+
+.metric-chip:nth-child(1) { animation-delay: 0.03s; }
+.metric-chip:nth-child(2) { animation-delay: 0.08s; }
+.metric-chip:nth-child(3) { animation-delay: 0.13s; }
+
+.top-brand-banner {
+  animation: fadeInUp 0.5s var(--ease-out) both;
+}
+
+/* ---------- Responsive Breakpoints ---------- */
+
+/* Tablet & small laptops */
+@media (max-width: 1024px) {
+  .top-brand-banner {
+    padding: 1.5rem 1.6rem 1.2rem;
+  }
+
+  .info-card {
+    padding: 0.9rem 1.05rem;
+  }
+
+  .keypoint-card {
+    padding: 0.8rem 0.95rem;
+  }
+}
+
+/* Large phones / narrow tablets */
+@media (max-width: 768px) {
+  .top-brand-banner {
+    padding: 1.2rem 1rem 1rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.2rem;
+  }
+
+  .top-brand-banner h1 {
+    font-size: 2rem !important;
+  }
+
+  .top-brand-banner p {
+    font-size: 0.84rem !important;
+  }
+
+  .section-title {
+    font-size: 1.08rem !important;
+    margin-top: 1rem;
+  }
+
+  .info-card,
+  .keypoint-card {
+    padding: 0.75rem 0.9rem;
+  }
+
+  .metric-chip {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.82rem;
+  }
+
+  .metric-chip span {
+    font-size: 0.82rem;
+  }
+
+  .metric-chip strong {
+    font-size: 0.78rem;
+  }
+
+  .keypoint-index {
+    width: 1.8rem;
+    height: 1.8rem;
+    min-width: 1.8rem;
+    font-size: 0.78rem;
+  }
+
+  .keypoint-text {
+    font-size: 0.86rem;
+  }
+
+  h1 { font-size: 1.6rem !important; }
+  h2 { font-size: 1.3rem !important; }
+  h3 { font-size: 1.1rem !important; }
+
+  [data-testid='stSidebar'] * {
+    font-size: 1rem;
+  }
+
+  p, li, label, .stMarkdown {
+    font-size: 0.88rem !important;
+  }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+  .top-brand-banner {
+    padding: 0.9rem 0.8rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .top-brand-banner h1 {
+    font-size: 1.6rem !important;
+  }
+
+  .info-card,
+  .keypoint-card {
+    padding: 0.6rem 0.75rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .keypoint-card {
+    gap: 0.55rem;
+  }
+
+  .metric-chip {
+    padding: 0.4rem 0.7rem;
+  }
+
+  .stButton > button,
+  .stDownloadButton > button {
+    font-size: 0.84rem;
+    min-height: 2.4rem;
+  }
+
+  [data-testid='stSidebar'] * {
+    font-size: 0.95rem;
+  }
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
